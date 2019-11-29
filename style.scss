@@ -1,0 +1,138 @@
+@import 'reset';
+@mixin boxshadow ($property) {
+  -webkit-box-shadow: $property;
+  -moz-box-shadow: $property;
+  box-shadow: $property;
+}
+// het werken met imports in sass
+// het werken met variabelen in sass
+$font-stack: "Space Mono", monospace;
+$primary-color: #2748B3;
+$background-zwart: #000;
+$titelcolor: #6B8EFF;
+$red:16px;
+$blue:8px; // voor de padding
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+  //het werken met nesting voor eigenschappen met dezelfde prefix
+  background: {
+    color: $background-zwart;
+    image: radial-gradient(#fff, rgba(255, 255, 255, 0.2) 2px, transparent 40px), radial-gradient(#fff, rgba(255, 255, 255, 0.15) 1px, transparent 30px), radial-gradient(#fff, rgba(255, 255, 255, 0.1) 2px, transparent 40px), radial-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1) 2px, transparent 30px);
+    size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+    attachment: fixed;
+  }
+
+}
+// begin nesting in article
+article {
+    display: flex;
+    flex-wrap: wrap;
+
+  section {
+    flex-basis: 45%;
+    border: 1px silver solid;
+    @include boxshadow(10px 10px 19px -4px rgba(255, 255, 255, 0.75));
+
+    padding: $blue;
+    margin: 10px;
+
+    clear: both;
+    overflow: auto;
+
+    &#selling-points {
+      flex-grow: 2;
+      flex-basis: 100%;
+    }
+  }
+
+    code {
+      background-color: $background-zwart;
+      border: 1px solid #ddd;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: $blue;
+      display: block;
+      word-wrap: break-word;
+
+    &.before {
+      float: left;
+      width: 40%;
+    }
+
+    &.after {
+      float: right;
+      width: 40%;
+    }
+  }
+    }
+/*
+// einde nesting in article
+aside[role="complementary"] {
+    float: right;
+    width: 300px / 960px * 100%;
+    }*/
+// voorbeeld van het nesten in sass
+/*
+nav {
+ul {
+  list-style: none;
+}
+
+li { display: inline-block; }
+*/
+a {
+  display: block;
+  padding: $blue;
+  text-decoration: none;
+}
+
+
+  // de titels
+//}
+h1, h2, h6 {
+  color: $titelcolor;
+}
+h1 {
+  text-align: center;
+}
+h6 {
+  text-align: center;
+  font-size: 2em;
+  padding: $blue;
+  margin-bottom: 0px;
+}
+footer h6{
+   padding: $blue;
+}
+//extended/inheritance
+%message-shared {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #2748B3;
+  background-color: #000;
+  width: 100%;
+}
+.message {
+@extend %message-shared;
+}
+.success {
+@extend %message-shared;
+  background-color: green;
+}
+.error {
+    @extend %message-shared;
+    background-color: red;
+    }
+.warning {
+    @extend %message-shared;
+    background-color: orange;
+    }
